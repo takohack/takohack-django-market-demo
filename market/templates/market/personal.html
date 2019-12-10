@@ -1,0 +1,29 @@
+{% extends "market/index.html" %}
+
+{% block mainBody %}
+    <div class="row">
+        <div class="table-responsive">
+  <table class="table">
+    <caption>响应式表格布局</caption>
+    <thead>
+      <tr>
+        <th>书籍名称</th>
+        <th>发布日期</th>
+        <th>价格</th></tr>
+    </thead>
+    <tbody>
+    {% for item in goods %}
+        <tr>
+        <td >{{ item.title }}</td>
+        <td>{{ item.push_date }}</td>
+        <td>{{ item.price }}</td></tr>
+      <tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+    </div>
+
+
+
+{% endblock %}

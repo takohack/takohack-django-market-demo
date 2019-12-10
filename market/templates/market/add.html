@@ -1,0 +1,53 @@
+{% extends "market/index.html" %}
+
+{% block mainBody %}
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-6">
+            <form enctype="multipart/form-data" method="post">
+             <div class="form-group">
+                <label for="name">联系方式</label>
+                     <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入名称">
+             </div>
+             <div class="form-group">
+                <label for="name">书籍名称</label>
+                     <input type="text" name="title" class="form-control" id="title" placeholder="请输入名称">
+             </div>
+             <div class="form-group">
+                <label for="name">价格</label>
+                     <input type="number" name="price" step="0.1" class="form-control" id="价格" placeholder="请输入价格">
+             </div>
+            <div class="form-group">
+                <label for="inputfile">图片</label>
+                    <input type="file" name="img" id="inputfile">
+            </div>
+             <div class="form-group">
+                <label for="sel1">分类:</label>
+                    <select class="form-control" id="sel1" name="cate">
+                    <option>电子数码</option>
+                    <option>家用电器</option>
+                    <option>技能服务</option>
+                    <option>服饰鞋子</option>
+                    <option>生活日用</option>
+                    <option>图书</option>
+                    <option>其他</option>
+                    </select>
+             <div class="form-group">
+                <label for="name">商品描述</label>
+                    <textarea class="form-control" name="describe" rows="9"></textarea>
+             </div>
+                <button type="submit" class="col-lg-12 btn btn-light waves-effect waves-light m-1">确认提交</button>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    </div>
+{% endblock %}

@@ -7,6 +7,7 @@ urlpatterns = [
     path('personal/',views.personal),
     path('need/',views.need),
     path('detail/<int:id>/', views.detail),
+    path('delete/<int:id>/', views.delete),
     path('other/',views.other),
     path('book/',views.book),
     path('life/',views.life),

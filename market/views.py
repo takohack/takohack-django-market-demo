@@ -51,6 +51,11 @@ def detail(request,id):
         'goods': goods
     }
     return render(request,'market/detail.html',context)
+def delete(request,id):
+    goods = Goods.objects.filter(id=id)
+    if goods:
+        goods.delete()
+        return redirect("/personal")
 
 def other(request):
     goods = Goods.objects.filter(cate="其他")

@@ -112,3 +112,4 @@ def tech(request):
 
     return render(request,'market/categories.html',context)
 
+

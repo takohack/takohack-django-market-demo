@@ -28,6 +28,7 @@ def add(request):
         describe = request.POST['describe']
         new_goods = Goods(username=username,phone=phone,title=title, price=price, img=img, cate=cate,describe=describe)
         new_goods.save()
+        return redirect('/')
     return render(request, 'market/add.html')
 
 def personal(request):
@@ -63,14 +64,18 @@ def other(request):
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 def book(request):
     goods = Goods.objects.filter(cate="图书")
     context = {
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 
 def life(request):
     goods = Goods.objects.filter(cate="生活日用")
@@ -78,38 +83,45 @@ def life(request):
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 def cloths(request):
     goods = Goods.objects.filter(cate="服饰鞋子")
     context = {
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 def service(request):
     goods = Goods.objects.filter(cate="技能服务")
-    print(goods)
     context = {
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 def diqnqi(request):
     goods = Goods.objects.filter(cate="家用电器")
-    print(goods)
     context = {
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 
 def tech(request):
     goods = Goods.objects.filter(cate="电子数码")
-    print(goods)
     context = {
         'goods': goods
     }
 
-    return render(request,'market/categories.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/categories_not_login.html', context)
+    return render(request, 'market/categories.html', context)
 
 

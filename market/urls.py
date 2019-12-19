@@ -13,6 +13,6 @@ urlpatterns = [
     path('life/',views.life),
     path('cloths/',views.cloths),
     path('service/',views.service),
-    path('dianqi/',views.diqnqi),
+    path('dianqi/',views.dianqi),
     path('tech/',views.tech),
 ]

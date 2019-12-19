@@ -104,7 +104,7 @@ def service(request):
     if not request.session.get('is_login', None):
         return render(request, 'market/categories_not_login.html', context)
     return render(request, 'market/categories.html', context)
-def diqnqi(request):
+def dianqi(request):
     goods = Goods.objects.filter(cate="家用电器")
     context = {
         'goods': goods

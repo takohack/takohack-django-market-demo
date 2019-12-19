@@ -1,5 +1,9 @@
 from django.shortcuts import render,redirect
 from market.models import Goods
+from PIL import Image
+
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 # Create your views here.
 
@@ -24,9 +28,33 @@ def add(request):
         title = request.POST['title']
         price = request.POST['price']
         img = request.FILES['img']
+        image = Image.open(img)
+        width, height = image.size
+        rate =1.0
+        if width >= 2000 or height >= 2000:
+            rate = 0.3
+        elif width >= 1000 or height >= 1000:
+            rate = 0.5
+        elif width >= 500 or height >= 500:
+            rate = 0.9
+        width = int(width * rate)
+        height = int(height * rate)
+
+        image.thumbnail((width, height), Image.ANTIALIAS)
+        pic_io = BytesIO()
+        image.save(pic_io, image.format)
+        pic_file = InMemoryUploadedFile(
+            file=pic_io,
+            field_name=None,
+            name=img.name,
+            content_type=img.content_type,
+            size=img.size,
+            charset=None
+        )
+
         cate = request.POST['cate']
         describe = request.POST['describe']
-        new_goods = Goods(username=username,phone=phone,title=title, price=price, img=img, cate=cate,describe=describe)
+        new_goods = Goods(username=username,phone=phone,title=title, price=price, img=pic_file, cate=cate,describe=describe)
         new_goods.save()
         return redirect('/')
     return render(request, 'market/add.html')

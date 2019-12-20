@@ -66,7 +66,8 @@ def add(request):
         new_goods = Goods(username=username,phone=phone,title=title, price=price, img=pic_file, cate=cate,describe=describe)
         new_goods.save()
         return redirect('/')
-    return render(request, 'market/add.html')
+    message = "上传图片有点慢,图片上传成功会自动跳转"
+    return render(request, 'market/add.html',locals())
 
 def personal(request):
     username = request.session.get('user_name', None)

@@ -6,6 +6,9 @@
 
         </div>
         <div class="col-lg-6">
+            {% if message %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endif %}
             <form enctype="multipart/form-data" method="post">
              <div class="form-group">
                 <label for="name">联系方式</label>
@@ -50,4 +53,14 @@
 
 
     </div>
+{% endblock %}
+
+{% block footjs %}
+<script type="text/javascript">
+  function rec(){
+    swal("Hello world!");
+
+  }
+  </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% endblock %}

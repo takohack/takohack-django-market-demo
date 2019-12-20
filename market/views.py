@@ -5,6 +5,7 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
+
 # Create your views here.
 
 def index(request):
@@ -27,7 +28,15 @@ def add(request):
         phone = request.POST['phone']
         title = request.POST['title']
         price = request.POST['price']
-        img = request.FILES['img']
+        if price=='':
+            message = "请填写价格"
+            return render(request, 'market/add.html', locals())
+        # noinspection PyBroadException
+        try:
+            img = request.FILES['img']
+        except:
+            message = "请上传图片"
+            return  render(request,'market/add.html',locals())
         image = Image.open(img)
         width, height = image.size
         rate =1.0
@@ -151,5 +160,7 @@ def tech(request):
     if not request.session.get('is_login', None):
         return render(request, 'market/categories_not_login.html', context)
     return render(request, 'market/categories.html', context)
+
+
 
 

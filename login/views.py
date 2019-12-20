@@ -42,10 +42,6 @@ def login(request):
 
 
 
-def register(request):
-    pass
-    return render(request, 'login/register.html')
-
 
 def logout(request):
     if not request.session.get('is_login', None):

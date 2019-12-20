@@ -90,8 +90,11 @@ def detail(request,id):
     }
     return render(request,'market/detail.html',context)
 def delete(request,id):
+    if not request.session.get('is_login', None):
+        return render(request, 'market/index_not_login.html')
     goods = Goods.objects.filter(id=id)
-    if goods:
+    username = request.session.get('user_name', None)
+    if username==goods[0].username:
         goods.delete()
         return redirect("/personal")
 

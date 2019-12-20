@@ -2,33 +2,26 @@
 
 {% block mainBody %}
     <div class="row">
-        <div class="col-lg-9">
-        <div class="table-responsive">
-  <table class="table">
-    <caption>响应式表格布局</caption>
-    <thead>
-      <tr>
-        <th>书籍名称</th>
-        <th>发布日期</th>
-        <th>价格</th></tr>
-    </thead>
-    <tbody>
     {% for item in goods %}
-        <tr>
-        <td >{{ item.title }}</td>
-        <td>{{ item.push_date }}</td>
-        <td>{{ item.price }}</td></tr>
-      <tr>
-    {% endfor %}
-    </tbody>
-  </table>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                    <h3 class="panel-title">{{ item.title }}</h3>
+            </div>
+            <div class="panel-body">
+                <h4> 价格:{{ item.price }}  分类:{{ item.cate }}</h4>
+             </div>
+             <h4> 发布日期:{{ item.push_date }}</h4>
+
+            <a href="/delete/{{ item.id }}" class="btn btn-info" role="button">删除</a>
+
         </div>
+
+        </div>
+
+    {% endfor %}
         </div>
     <div class="col-lg-3">
-        <h2>按钮元素</h2>
-    <a href="#" class="btn btn-info" role="button">链接按钮</a>
-        <a href="#" class="btn btn-info" role="button">链接按钮</a>
-
     </div>
 </div>
 

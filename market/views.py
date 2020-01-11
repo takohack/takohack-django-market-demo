@@ -89,7 +89,9 @@ def detail(request,id):
     context = {
         'goods': goods
     }
-    return render(request,'market/detail.html',context)
+    if not request.session.get('is_login', None):
+        return render(request, 'market/detail_not_login.html', context)
+    return render(request, 'market/detail.html', context)
 def delete(request,id):
     if not request.session.get('is_login', None):
         return render(request, 'market/index_not_login.html')

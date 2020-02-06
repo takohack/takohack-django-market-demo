@@ -2,29 +2,63 @@
 
 {% block mainBody %}
     <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>价格</th>
+                    <th>分类</th>
+                    <th>发布日期</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in goods %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.cate }}</td>
+                    <td>{{ item.push_date }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">删除</button>
+                        <a href="/detail/{{ item.id }}" class="btn btn-success" role="button">详情</a>
+                    </td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+
+        </div>
     {% for item in goods %}
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-            <div class="panel-heading">
-                    <h3 class="panel-title">{{ item.title }}</h3>
-            </div>
-            <div class="panel-body">
-                <h4> 价格:{{ item.price }}  分类:{{ item.cate }}</h4>
-             </div>
-             <h4> 发布日期:{{ item.push_date }}</h4>
-
-             <a href="/detail/{{ item.id }}" class="btn btn-info" role="button">详情</a>
-              <a href="/delete/{{ item.id }}" class="btn btn-danger" role="button">删除</a>
-        </div>
-
-        </div>
-
-    {% endfor %}
-        </div>
-    <div class="col-lg-3">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">确认框</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <form>
+       	<div class="form-group">
+            <label for="message-text" class="control-label">确定要删除此商品？</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <a href="/delete/{{ item.id }}" class="btn btn-danger" role="button">确认删除</a>
+      </div>
     </div>
+  </div>
 </div>
+{% endfor %}
 
+{% endblock %}
 
-
+{% block footjs %}
+<script type="text/javascript">
+$('#myModal').on('shown.bs.modal', function () {
+	  $('#myInput').focus()
+	})
+</script>
 {% endblock %}

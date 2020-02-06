@@ -4,6 +4,7 @@ from PIL import Image
 
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -12,12 +13,22 @@ def index(request):
 
     goods = Goods.objects.all()
 
-    context = {
-        'goods':goods
-    }
+    p = Paginator(goods,3)
+    p1 = p.count
+    p2 = p.num_pages
+    p3 = p.page_range
+    try:
+        current_num = int(request.GET.get('page', 1))  # 当你在url内输入的?page = 页码数  显示你输入的页面数目 默认为第2页
+        book_list = p.page(current_num)
+    except:
+        book_list = p.page(1)
+    pageRange = p.page_range
+
     if not request.session.get('is_login', None):
-        return render(request,'market/index_not_login.html',context)
-    return render(request,'market/index.html',context)
+        return render(request,'market/index_not_login.html',locals())
+    return render(request,'market/index.html',locals())
+
+
 
 
 def add(request):

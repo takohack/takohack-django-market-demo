@@ -21,7 +21,7 @@ from login import views as loginviews
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('adminmanage/', admin.site.urls),
     path('',include('market.urls')),
     path('login/', loginviews.login),
     path('register/', loginviews.register),
